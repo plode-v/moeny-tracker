@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Sidebar = () => {
+
   return (
-    <div className='w-[250px] h-screen border'>
+    <div className='w-[300px] h-screen border'>
         Sidebar
     </div>
   )
