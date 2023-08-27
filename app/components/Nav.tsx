@@ -7,7 +7,6 @@ const Nav = () => {
 
     const { user } = useUser();
 
-    // TODO: Add skeleton on load from mui
     const name = user?.firstName;
 
   return (
@@ -20,6 +19,7 @@ const Nav = () => {
         </div>
         <div className='border'>
             <div className='h-[100px]'>
+            {/* FIXME: increase size of UserButton */}
                 <UserButton afterSignOutUrl='/' />
             </div>
         </div>
