@@ -1,14 +1,10 @@
 import React from 'react'
-import Sidebar from '@/app/components/Sidebar'
 import Nav from '@/app/components/Nav'
 
 const DashboardLayout = ({children}: {children: React.ReactNode}) => {
   return (
-    <div className='flex'>
-      <div>        
-        <Sidebar />
-      </div>
-      <div className='w-full'>
+    <div className='w-full flex justify-center h-screen bg-slate-900'>
+      <div className='w-full lg:w-3/4 3xl:w-1/2'>
         <Nav />
         {children}
       </div>

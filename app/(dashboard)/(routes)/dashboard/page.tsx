@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Amount from '@/app/components/Amount'
 import ColumnChart from '@/app/components/ColumnChart'
@@ -5,7 +7,7 @@ import CategoryChart from '@/app/components/CategoryChart'
 
 const Dashboard = () => {
   return (
-    <div className='h-[calc(100%-60px)] bg-slate-800'>
+    <div className='h-[calc(100%-60px)]'>
       <div className='flex h-1/2'>
         <div className='flex flex-col w-2/3'>
           <Amount />

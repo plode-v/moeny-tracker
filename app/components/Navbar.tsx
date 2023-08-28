@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
-import { SignInButton, SignUpButton } from "@clerk/nextjs"
 
 const Navbar = () => {
 
@@ -24,12 +23,7 @@ const Navbar = () => {
             <Link href="/">Logo</Link>
           </div>
           <div className='flex gap-2'>
-            <SignInButton afterSignInUrl='/dashboard' mode='modal'>
-              <p className='bg-white text-black sm:py-2 sm:px-3 p-1 text-[0.75rem] sm:text-[1rem] rounded-md cursor-pointer'>Sign In</p>
-            </SignInButton>
-              <SignUpButton afterSignInUrl='/dashboard' mode='modal'>
-                <p className='bg-white text-black sm:py-2 sm:px-3 p-1 text-[0.75rem] sm:text-[1rem] rounded-md cursor-pointer'>Sign Up</p>
-              </SignUpButton>
+            <Link href='/dashboard'>Dashboard</Link>
           </div>
         </nav>
   )
