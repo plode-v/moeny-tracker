@@ -7,16 +7,16 @@ const CategoryChart = () => {
     const amountUsed = [
         {
             id: 1,
-            amount: 807,
+            amount: 407,
             category: "Groceries",
-            budget: 1000,
+            budget: 600,
             color: "#FFA500"
         },
         {
             id: 2,
-            amount: 65,
-            category: "Gas",
-            budget: 300,
+            amount: 81.23,
+            category: "Transportation",
+            budget: 150,
             color: "navy"
         },
         {
@@ -37,26 +37,26 @@ const CategoryChart = () => {
         },
         {
             id: 5,
-            amount: 450.72,
-            category: "Food",
-            budget: 300,
-            color: "maroon"
+            amount: 418.14,
+            category: "Travel",
+            budget: 450,
+            color: "red"
 
         },
         {
             id: 6,
-            amount: 450.72,
-            category: "Food",
-            budget: 300,
-            color: "maroon"
+            amount: 113.38,
+            category: "Shopping",
+            budget: 120,
+            color: "purple"
 
         },
         {
             id: 7,
-            amount: 450.72,
-            category: "Food",
-            budget: 300,
-            color: "maroon"
+            amount: 5000,
+            category: "Investment",
+            budget: 5000,
+            color: "green"
 
         }
     ]
@@ -79,7 +79,7 @@ const CategoryChart = () => {
     }
 
   return (
-    <div className='w-1/3 m-2 mt-4 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto'>
+    <div className='w-1/3 m-2 mt-4 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
         <h1 className='lg:my-5 lg:mx-3 font-bold lg:text-[1.5rem] m-2'>
             Categories
         </h1>

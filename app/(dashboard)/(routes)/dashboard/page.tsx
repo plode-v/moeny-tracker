@@ -1,9 +1,7 @@
 'use client'
 
 import React from 'react'
-import Amount from '@/app/components/Amount'
-import ColumnChart from '@/app/components/ColumnChart'
-import CategoryChart from '@/app/components/CategoryChart'
+import { Amount, ColumnChart, CategoryChart, QuickAdd, TransactionHistory } from '@/app/components'
 
 const Dashboard = () => {
   return (
@@ -16,12 +14,8 @@ const Dashboard = () => {
         <CategoryChart />
       </div>
       <div className='flex h-1/2'>
-        <div className='w-1/2 m-2 ml-4 mb-4 rounded-lg bg-neutral-50'>
-          Transactions History
-        </div>
-        <div className='w-1/2 m-2 mr-4 mb-4 rounded-lg bg-neutral-50'>
-          Quick add
-        </div>
+        <TransactionHistory />
+        <QuickAdd />
       </div>
     </div>
   )
