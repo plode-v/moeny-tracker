@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from '@/app/components/Nav'
+import Nav from '@/components/Nav'
 
 const DashboardLayout = ({children}: {children: React.ReactNode}) => {
   return (

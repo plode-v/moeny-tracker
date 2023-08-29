@@ -1,7 +1,12 @@
 'use client'
 
 import React from 'react'
-import { Amount, ColumnChart, CategoryChart, QuickAdd, TransactionHistory } from '@/app/components'
+import Amount from '@/components/Amount'
+import ColumnChart from '@/components/ColumnChart'
+import CategoryChart from '@/components/CategoryChart'
+import TransactionHistory from '@/components/TransactionHistory'
+import QuickAdd from '@/components/QuickAdd'
+
 
 const Dashboard = () => {
   return (

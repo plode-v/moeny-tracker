@@ -1,5 +1,5 @@
 import React from 'react'
-import { currencyFormat } from '../lib/utils'
+import { currencyFormat } from '@/lib/utils'
 
 const Amount = () => {
   return (

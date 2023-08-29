@@ -1,6 +1,8 @@
 import React from 'react'
-import { currencyFormat } from '../lib/utils'
-import { LinearProgress, LinearProgressClasses, linearProgressClasses, styled } from '@mui/material'
+import { currencyFormat } from '@/lib/utils'
+import { LinearProgress, linearProgressClasses, styled } from '@mui/material'
+import { ScrollArea } from '@radix-ui/react-scroll-area'
+import { Button } from './ui/button'
 
 const CategoryChart = () => {
 
@@ -78,8 +80,12 @@ const CategoryChart = () => {
         alert("Modal")
     }
 
+    const tags = Array.from({ length: 50 }).map(
+        (_, i, a) => `v1.2.0-beta.${a.length - i}`
+    )
+
   return (
-    <div className='w-1/3 m-2 mt-4 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
+    <ScrollArea className='w-1/3 m-2 mt-4 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
         <h1 className='lg:my-5 lg:mx-3 font-bold lg:text-[1.5rem] m-2'>
             Categories
         </h1>
@@ -110,7 +116,8 @@ const CategoryChart = () => {
                 </div>
             ))}
         </div>
-    </div>
+    </ScrollArea>
+
   )
 }
 
