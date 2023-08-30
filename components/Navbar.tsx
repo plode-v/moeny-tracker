@@ -18,7 +18,7 @@ const Navbar = () => {
       }, [])
 
   return (
-    <nav className='fixed top-0 sm:my-5 my-2 w-[95%] lg:w-5/6 3xl:w-[1800px] flex justify-between sm:h-[60px] h-[50px] rounded-lg bg-blue-500 text-white items-center sm:p-5 p-2 duration-[300ms]' id='navbar'>
+    <nav className='fixed top-0 sm:my-5 my-2 w-[95%] lg:w-5/6 3xl:w-[1800px] flex justify-between sm:h-[60px] h-[50px] rounded-lg bg-blue-500 text-white items-center sm:p-5 p-2 duration-500' id='navbar'>
           <div>
             <Link href="/">Logo</Link>
           </div>

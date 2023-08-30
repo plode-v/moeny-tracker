@@ -85,7 +85,7 @@ const CategoryChart = () => {
     )
 
   return (
-    <ScrollArea className='w-1/3 m-2 mt-4 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
+    <ScrollArea className='w-1/3 ml-2 mb-1 mt-2 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
         <h1 className='lg:my-5 lg:mx-3 font-bold lg:text-[1.5rem] m-2'>
             Categories
         </h1>

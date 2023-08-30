@@ -43,7 +43,7 @@ const ColumnChart = () => {
   ]
 
   return (
-    <div className='ml-2 lg:ml-0 rounded-lg h-5/6 bg-neutral-50'>
+    <div className='ml-2 mb-1 lg:ml-0 rounded-lg h-full bg-neutral-50'>
       <div className='w-full flex justify-end p-2'>
         <DateRangePicker />
       </div>
@@ -62,11 +62,11 @@ const ColumnChart = () => {
                 left: 10
               }}
             >
+              <Legend />
               <CartesianGrid strokeDasharray="100 0" />
               <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
-              {/* <Legend /> */}
               <Bar dataKey='Food' fill='#fcba03' stackId='a' />
               <Bar dataKey='Rent' fill='#8e2bcc' stackId='a' />
               <Bar dataKey='Groceries' fill='#cc2b8e' stackId='a' />
