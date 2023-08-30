@@ -1,7 +1,7 @@
 import React from 'react'
 import { currencyFormat } from '@/lib/utils'
 import { LinearProgress, linearProgressClasses, styled } from '@mui/material'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
+import { ScrollArea } from './ui/scroll-area'
 import { Button } from './ui/button'
 
 const CategoryChart = () => {
@@ -79,10 +79,6 @@ const CategoryChart = () => {
         // TODO: show category details on click (modal)
         alert("Modal")
     }
-
-    const tags = Array.from({ length: 50 }).map(
-        (_, i, a) => `v1.2.0-beta.${a.length - i}`
-    )
 
   return (
     <ScrollArea className='w-1/3 ml-2 mb-1 mt-2 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
