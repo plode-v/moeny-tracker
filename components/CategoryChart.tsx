@@ -82,12 +82,12 @@ const CategoryChart = () => {
 
   return (
     <ScrollArea className='w-1/3 ml-2 mb-1 mt-2 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
-        <h1 className='lg:my-5 lg:mx-3 font-bold lg:text-[1.5rem] m-2'>
+        <h1 className='2xl:my-5 2xl:mx-3 font-bold lg:text-[1.5rem] m-2'>
             Categories
         </h1>
         <div className='flex flex-col items-between'>
             {amountUsed.map((expense) => (
-                <div key={expense.id} className='h-[70px] flex items-center mx-4 my-2 rounded-lg border-2 cursor-pointer' onClick={handleModal}>
+                <div key={expense.id} className='h-[70px] flex items-center mx-4 my-1 2xl:my-2 rounded-lg border-2 cursor-pointer' onClick={handleModal}>
                     <div className='flex flex-col h-full w-2/3'>
                         <div className='flex h-full gap-2 items-center'>
                             <div className="h-1/2 aspect-square  ml-2 rounded-full" style={{backgroundColor: expense.color}} />

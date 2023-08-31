@@ -114,7 +114,7 @@ const TransactionHistory = () => {
   return (
     // FIXME: show modal onClick on each transaction
     // FIXME: change to shadcn data table
-    <ScrollArea className='w-1/2 m-1 ml-4 lg:ml-0 mb-4 rounded-lg bg-neutral-50 p-2'>
+    <ScrollArea className='w-3/5 m-1 ml-4 lg:ml-0 mb-4 rounded-lg bg-neutral-50 p-2'>
         <h1 className='text-lg font-bold p-2'>Transaction History</h1>
       <Table>
         <TableHeader className='hover:bg-transparent'>
@@ -126,14 +126,14 @@ const TransactionHistory = () => {
             <TableHead className='text-right'>Description</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className='text-[12px] 2xl:text-[16px]'>
           {data.map(money => (
             <TableRow key={money.id}>
               <TableCell className='border'>{money.time}</TableCell>
               <TableCell>{money.type}</TableCell>
               <TableCell>{currencyFormat(money.amount)}</TableCell>
               <TableCell>{money.category}</TableCell>
-              <TableCell className='text-right text-muted-foreground text-xs overflow-hidden text-ellipsis whitespace-nowrap max-w-[100px]'>{money.description}</TableCell>
+              <TableCell className='text-right text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap max-w-[100px]'>{money.description}</TableCell>
             </TableRow>
           ))}
         </TableBody>
