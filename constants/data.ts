@@ -22,8 +22,16 @@ export const categories = [
         title: "Bills",
         color: "#e0385f",
         budget: 3500
+    },
+    {
+        id: 5,
+        title: "Shopping",
+        color: "#e0d038",
+        budget: 1000
     }
 ]
+
+const dateString = new Date().toLocaleDateString('en-US', { day: "numeric", month: "short", year: "numeric" });
 
 export const data = [
     {
@@ -32,7 +40,7 @@ export const data = [
         category: "Food",
         type: "Expense",
         description: "Momo shabu",
-        time: new Date()
+        time: dateString
     },
     {
         id: 2,
@@ -40,6 +48,22 @@ export const data = [
         category: "Bills",
         type: "Expense",
         description: "July 2023 Rent",
-        time: new Date()
+        time: dateString
+    },
+    {
+        id: 3,
+        amount: 1229.12,
+        category: "Paycheck",
+        type: "Income",
+        description: "Aug Paycheck",
+        time: dateString
+    },
+    {
+        id: 4,
+        amount: 430.21,
+        category: "Shopping",
+        type: "Expense",
+        description: "YSL wallet",
+        time: dateString
     }
 ]
