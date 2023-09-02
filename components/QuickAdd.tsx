@@ -41,7 +41,7 @@ const QuickAdd = () => {
       if (!exAmount) {
         alert("Amount cannot be empty");
       } else {
-        alert("OK")
+        alert(`${exAmount}, ${exCategory}`)
       }
     } catch (err) {
       console.error(err);
@@ -49,7 +49,6 @@ const QuickAdd = () => {
   };
 
   return (
-    // FIXME: change tabs bg-color
     // FIXME: change to shadcn form
     // TODO: remove input field outline on focus
     <div className='w-2/5 m-1 mr-4 lg:mr-0 mb-4 rounded-lg bg-neutral-50'>

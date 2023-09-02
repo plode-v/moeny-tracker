@@ -1,67 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { currencyFormat } from '@/lib/utils'
 import { LinearProgress, linearProgressClasses, styled } from '@mui/material'
 import { ScrollArea } from './ui/scroll-area'
-import { Button } from './ui/button'
+import { categories, data } from "@/constants/data"
+import { cn } from '@/lib/utils'
+
+import { Progress } from './ui/progress'
+
+type CategoryExpenses = { [key: string]: number };
 
 const CategoryChart = () => {
 
-    const amountUsed = [
-        {
-            id: 1,
-            amount: 407,
-            category: "Groceries",
-            budget: 600,
-            color: "#FFA500"
-        },
-        {
-            id: 2,
-            amount: 81.23,
-            category: "Transportation",
-            budget: 150,
-            color: "navy"
-        },
-        {
-            id: 3,
-            amount: 450.72,
-            category: "Food",
-            budget: 300,
-            color: "maroon"
+    const [progress, setProgress] = useState<number>();
 
-        },
-        {
-            id: 4,
-            amount: 60,
-            category: "Subscriptions",
-            budget: 70,
-            color: "pink"
-
-        },
-        {
-            id: 5,
-            amount: 418.14,
-            category: "Travel",
-            budget: 450,
-            color: "red"
-
-        },
-        {
-            id: 6,
-            amount: 113.38,
-            category: "Shopping",
-            budget: 120,
-            color: "purple"
-
-        },
-        {
-            id: 7,
-            amount: 5000,
-            category: "Investment",
-            budget: 5000,
-            color: "green"
-
-        }
-    ]
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         height: 10,
@@ -77,43 +28,89 @@ const CategoryChart = () => {
 
     const handleModal = () => {
         // TODO: show category details on click (modal)
-        alert("Modal")
+        alert()
     }
 
+    const categoryExpenses: CategoryExpenses = {}
+
+    data.forEach((expense) => {
+        if (!categoryExpenses[expense.category]) {
+            categoryExpenses[expense.category] = 0
+        }
+        categoryExpenses[expense.category] += expense.amount;
+
+    })
+
   return (
+    // <ScrollArea className='w-1/3 ml-2 mb-1 mt-2 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
+    //     <h1 className='2xl:my-5 2xl:mx-3 font-bold lg:text-[1.5rem] m-2'>
+    //         Categories
+    //     </h1>
+    //     <div className='flex flex-col items-between'>
+    //         {/* Categories names */}
+    //         {categories.map((expense) => (
+    //             <div key={expense.id} className='h-[70px] flex items-center mx-4 my-1 2xl:my-2 rounded-lg border-2 cursor-pointer' onClick={handleModal}>
+    //                 <div className='flex flex-col h-full w-2/3'>
+    //                     <div className='flex h-full gap-2 items-center'>
+    //                         <div className="h-1/2 aspect-square ml-2 rounded-full" style={{backgroundColor: expense.color}} />
+    //                         <h1 className='font-semibold'>
+    //                             {expense.title}
+    //                         </h1>
+    //                     </div>
+    //                     <div className='h-full ml-2 grid items-start'>
+    //                         {/* <div className='h-3/4 w-full border' /> */}
+    //                         <BorderLinearProgress value={expense.amount < expense.budget ? expense.amount / expense.budget * 100 : 100} variant='determinate' />
+    //                     </div>
+    //                 </div>
+    //                 <div className='w-1/3 mx-2 items-end flex flex-col'>
+    //                     {/* TODO: show amount used / budget */}
+    //                     <div>
+    //                         {currencyFormat(expense.amount)} / 
+    //                     </div>
+    //                     <div>
+    //                         {currencyFormat(expense.budget)}
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         ))}
+    //     </div>
+    // </ScrollArea>
+
     <ScrollArea className='w-1/3 ml-2 mb-1 mt-2 mr-4 lg:mr-0 rounded-lg bg-neutral-50 overflow-auto category'>
-        <h1 className='2xl:my-5 2xl:mx-3 font-bold lg:text-[1.5rem] m-2'>
-            Categories
-        </h1>
+        <h1 className='2xl:my-5 2xl:mx-3 font-bold lg:text-[1.5rem] m-2'>Categories</h1>
         <div className='flex flex-col items-between'>
-            {amountUsed.map((expense) => (
-                <div key={expense.id} className='h-[70px] flex items-center mx-4 my-1 2xl:my-2 rounded-lg border-2 cursor-pointer' onClick={handleModal}>
+            {/* Categories */}
+            {categories.map((cat) => (
+                <div key={cat.id} className='h-[70px] flex items-center mx-4 my-1 2xl:my-2 rounded-lg border-2 cursor-pointer' onClick={handleModal}>
                     <div className='flex flex-col h-full w-2/3'>
                         <div className='flex h-full gap-2 items-center'>
-                            <div className="h-1/2 aspect-square  ml-2 rounded-full" style={{backgroundColor: expense.color}} />
-                            <h1 className='font-semibold'>
-                                {expense.category}
-                            </h1>
+                            <div className="h-1/2 aspect-square ml-2 rounded-full" style={{backgroundColor: cat.color}} />
+                            <h1 className='font-semibold'>{cat.title}</h1>
                         </div>
                         <div className='h-full ml-2 grid items-start'>
-                            {/* <div className='h-3/4 w-full border' /> */}
-                            <BorderLinearProgress value={expense.amount < expense.budget ? expense.amount / expense.budget * 100 : 100} variant='determinate' />
+                            <Progress value={categoryExpenses[cat.title] < cat.budget ? categoryExpenses[cat.title] / cat.budget * 100 : (!categoryExpenses[cat.title] ? 0 : 100)} className='bg-gray-300' />
                         </div>
                     </div>
                     <div className='w-1/3 mx-2 items-end flex flex-col'>
-                        {/* TODO: show amount used / budget */}
-                        <div>
-                            {currencyFormat(expense.amount)} / 
-                        </div>
-                        <div>
-                            {currencyFormat(expense.budget)}
+                        <div className='w-1/3 mx-2 items-end justify-between flex flex-col text-end'>
+                            <p className=''>Remaining:</p>
+                            <p>{currencyFormat(Number((cat.budget - (categoryExpenses[cat.title]) || cat.budget).toFixed(2)))}</p>
                         </div>
                     </div>
                 </div>
             ))}
         </div>
+        {/* {categories.map((category) => (
+            <div key={category.id}>
+                <h2>{category.title}</h2>
+                <p>Budget: ${category.budget}</p>
+                <p>Expenses: ${categoryExpenses[category.title]} || 0</p>
+                <p>
+                    Remaining Budget: ${category.budget - (categoryExpenses[category.title] || 0)}
+                </p>
+            </div>
+        ))} */}
     </ScrollArea>
-
   )
 }
 

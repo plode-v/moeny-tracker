@@ -18,8 +18,8 @@ const TransactionHistory = () => {
       type: "Expense",
       amount: 1200,
       category: "Rent",
-      description: "July 2023 rent kjasd;flja;sidjf;laksjd;f;alsdfka;lsdjf;",
-      time: '2023-Aug-29'
+      description: "July 2023 rent",
+      time: new Date().getFullYear()
     },
     {
       id: 2,
