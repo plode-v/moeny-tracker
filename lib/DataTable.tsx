@@ -1,0 +1,37 @@
+import { PaymentType } from "@/constants/data";
+import { ColumnDef } from "@tanstack/react-table";
+import { currencyFormat } from "./utils";
+
+export const columns: ColumnDef<PaymentType>[] = [
+    {
+      accessorKey: "time",
+      header: "Time",
+      cell: ({ row }) => (
+        <div>{row.getValue("time")}</div>
+      )
+    },
+    {
+      accessorKey: "amount",
+      header: "Amount",
+      cell: ({ row }) => {
+        return <div>{currencyFormat(Number(row.getValue("amount")))}</div>
+      }
+    },
+    {
+      accessorKey: "category",
+      header: "Categories",
+      cell: ({ row }) => {
+        return <div>{row.getValue("category")}</div>
+      }
+    },
+    {
+      accessorKey: "description",
+      header: "Description",
+      cell: ({ row }) => <div className='lowercase truncate text-ellipsis w-max'>{row.getValue("description")}</div>
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: () => <div className='text-end bg-black text-white w-min '>Trash</div>
+    }
+  ]

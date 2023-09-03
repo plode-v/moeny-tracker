@@ -23,44 +23,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import  { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { ChevronDown } from "lucide-react";
 import { Button } from './ui/button'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuCheckboxItem } from './ui/dropdown-menu'
-
-export const columns: ColumnDef<PaymentType>[] = [
-  {
-    accessorKey: "time",
-    header: "Time",
-    cell: ({ row }) => (
-      <div>{row.getValue("time")}</div>
-    )
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      return <div>{currencyFormat(Number(row.getValue("amount")))}</div>
-    }
-  },
-  {
-    accessorKey: "category",
-    header: "Categories",
-    cell: ({ row }) => {
-      return <div>{row.getValue("category")}</div>
-    }
-  },
-  {
-    accessorKey: "description",
-    header: "Description",
-    cell: ({ row }) => <div className='lowercase truncate text-ellipsis w-max'>{row.getValue("description")}</div>
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: () => <div className='text-end bg-black text-white w-min '>Trash</div>
-  }
-]
+import { columns } from '@/lib/DataTable'
 
 const TransactionHistory = () => {
 
@@ -102,13 +69,13 @@ const TransactionHistory = () => {
     // FIXME: show modal onClick on each transaction
     <ScrollArea className='w-3/5 m-1 ml-4 lg:ml-0 mb-4 rounded-lg bg-neutral-50 p-2'>
         <h1 className='text-lg font-bold p-2'>Transaction History</h1>
-        <div className='flex justify-between'>
+        <div className='flex justify-between mx-2'>
           <Input 
             placeholder='Search...'
             value={(table.getColumn("description")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn('description')?.setFilterValue(event.target.value)}
             // FIXME: fix corners borders on focus
-            className='max-x-sm w-2/3 ml-2 focus-visible:ring-0'
+            className='max-x-sm w-2/3 focus-visible:ring-0'
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

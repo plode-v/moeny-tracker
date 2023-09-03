@@ -76,3 +76,4 @@ export const data: PaymentType[] = [
         type: "Expense"
     }
 ]
+
