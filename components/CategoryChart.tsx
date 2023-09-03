@@ -66,16 +66,6 @@ const CategoryChart = () => {
                 </div>
             ))}
         </div>
-        {/* {categories.map((category) => (
-            <div key={category.id}>
-                <h2>{category.title}</h2>
-                <p>Budget: ${category.budget}</p>
-                <p>Expenses: ${categoryExpenses[category.title]} || 0</p>
-                <p>
-                    Remaining Budget: ${category.budget - (categoryExpenses[category.title] || 0)}
-                </p>
-            </div>
-        ))} */}
     </ScrollArea>
   )
 }

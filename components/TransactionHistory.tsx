@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { ScrollArea } from './ui/scroll-area'
+import { currencyFormat } from '@/lib/utils'
+import { data, PaymentType } from '@/constants/data'
+
 import {
   Table,
   TableBody,
@@ -7,43 +11,175 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ScrollArea } from './ui/scroll-area'
-import { currencyFormat } from '@/lib/utils'
-import { data } from '@/constants/data'
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import  { Input } from "@/components/ui/input";
+import { ChevronDown } from "lucide-react";
+import { Button } from './ui/button'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuCheckboxItem } from './ui/dropdown-menu'
+
+export const columns: ColumnDef<PaymentType>[] = [
+  {
+    accessorKey: "time",
+    header: "Time",
+    cell: ({ row }) => (
+      <div>{row.getValue("time")}</div>
+    )
+  },
+  {
+    accessorKey: "amount",
+    header: "Amount",
+    cell: ({ row }) => {
+      return <div>{currencyFormat(Number(row.getValue("amount")))}</div>
+    }
+  },
+  {
+    accessorKey: "category",
+    header: "Categories",
+    cell: ({ row }) => {
+      return <div>{row.getValue("category")}</div>
+    }
+  },
+  {
+    accessorKey: "description",
+    header: "Description",
+    cell: ({ row }) => <div className='lowercase truncate text-ellipsis w-max'>{row.getValue("description")}</div>
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: () => <div className='text-end bg-black text-white w-min '>Trash</div>
+  }
+]
 
 const TransactionHistory = () => {
+
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
+
+  const table = useReactTable({
+    data,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection
+    }
+  })
+
 
   const handleClick = () => {
     alert("Transaction History")
   }
 
+  const handleTrash = () => {
+    alert("trash")
+  }
+
+
   return (
     // FIXME: show modal onClick on each transaction
-    // FIXME: change to shadcn data table
     <ScrollArea className='w-3/5 m-1 ml-4 lg:ml-0 mb-4 rounded-lg bg-neutral-50 p-2'>
         <h1 className='text-lg font-bold p-2'>Transaction History</h1>
-      <Table>
-        <TableHeader className='hover:bg-transparent'>
-          <TableRow>
-            <TableHead className='text-left'>Time</TableHead>
-            <TableHead className='text-left'>Type</TableHead>
-            <TableHead className='text-left'>Amount</TableHead>
-            <TableHead className='text-left'>Category</TableHead>
-            <TableHead className='text-right'>Description</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className='text-[12px] 2xl:text-[16px]'>
-          {data.map(money => (
-            <TableRow key={money.id} className='cursor-pointer' onClick={handleClick}>
-              <TableCell className='border-y'>{money.time}</TableCell>
-              <TableCell className='border-y'>{money.type}</TableCell>
-              <TableCell className='border-y'>{currencyFormat(money.amount)}</TableCell>
-              <TableCell className='border-y'>{money.category}</TableCell>
-              <TableCell className='text-right text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap max-w-[100px] border-y'>{money.description}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+        <div className='flex justify-between'>
+          <Input 
+            placeholder='Search...'
+            value={(table.getColumn("description")?.getFilterValue() as string) ?? ""}
+            onChange={(event) => table.getColumn('description')?.setFilterValue(event.target.value)}
+            // FIXME: fix corners borders on focus
+            className='max-x-sm w-2/3 ml-2 focus-visible:ring-0'
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="default">
+                Columns <ChevronDown className=' ml-2 h-4 w-4' />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              {table.getAllColumns().filter((column) => column.getCanHide()).map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className='capitalize cursor-pointer focus:ring-0 focus-within:outline-none'
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        <div>
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {!header.isPlaceholder && flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow 
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell 
+                    colSpan={columns.length}
+                    className='h-24 text-center'
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
     </ScrollArea>
   )
 }

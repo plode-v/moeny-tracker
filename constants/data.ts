@@ -33,37 +33,46 @@ export const categories = [
 
 const dateString = new Date().toLocaleDateString('en-US', { day: "numeric", month: "short", year: "numeric" });
 
-export const data = [
+export type PaymentType = {
+    id: number,
+    amount: number,
+    category: string
+    description: string,
+    time: string,
+    type: 'Income' | 'Expense'
+  }
+
+export const data: PaymentType[] = [
     {
         id: 1,
         amount: 102.12,
         category: "Food",
-        type: "Expense",
         description: "Momo shabu",
-        time: dateString
+        time: dateString,
+        type: "Expense"
     },
     {
         id: 2,
         amount: 1000,
         category: "Bills",
-        type: "Expense",
         description: "July 2023 Rent",
-        time: dateString
+        time: dateString,
+        type: "Expense"
     },
     {
         id: 3,
         amount: 1229.12,
         category: "Paycheck",
-        type: "Income",
         description: "Aug Paycheck",
-        time: dateString
+        time: dateString,
+        type: "Income"
     },
     {
         id: 4,
         amount: 430.21,
         category: "Shopping",
-        type: "Expense",
         description: "YSL wallet",
-        time: dateString
+        time: dateString,
+        type: "Expense"
     }
 ]

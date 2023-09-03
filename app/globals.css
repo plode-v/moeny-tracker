@@ -77,7 +77,6 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: rgb(15 23 42);
 }
 
 .category::-webkit-scrollbar {
