@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollArea } from './ui/scroll-area'
-import { currencyFormat } from '@/lib/utils'
-import { data, PaymentType } from '@/constants/data'
+import { data } from '@/constants/data'
 
 import {
   Table,
@@ -12,7 +11,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {
-  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
@@ -74,7 +72,6 @@ const TransactionHistory = () => {
             placeholder='Search...'
             value={(table.getColumn("description")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn('description')?.setFilterValue(event.target.value)}
-            // FIXME: fix corners borders on focus
             className='max-x-sm w-2/3 focus-visible:ring-0'
           />
           <DropdownMenu>

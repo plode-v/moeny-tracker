@@ -1,6 +1,7 @@
 import { PaymentType } from "@/constants/data";
 import { ColumnDef } from "@tanstack/react-table";
 import { currencyFormat } from "./utils";
+import { BiTrash } from "react-icons/bi"
 
 export const columns: ColumnDef<PaymentType>[] = [
     {
@@ -32,6 +33,11 @@ export const columns: ColumnDef<PaymentType>[] = [
     {
       id: "actions",
       enableHiding: false,
-      cell: () => <div className='text-end bg-black text-white w-min '>Trash</div>
+      cell: () => <div className='text-end bg-black text-lg cursor-pointer justify-center flex w-0' 
+        onClick={() => {
+          // TODO: delete this item
+        }}>
+        <BiTrash />
+      </div>
     }
   ]
