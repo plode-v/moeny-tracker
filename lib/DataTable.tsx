@@ -33,11 +33,19 @@ export const columns: ColumnDef<PaymentType>[] = [
     {
       id: "actions",
       enableHiding: false,
-      cell: () => <div className='text-end bg-black text-lg cursor-pointer justify-center flex w-0' 
-        onClick={() => {
-          // TODO: delete this item
-        }}>
-        <BiTrash />
-      </div>
+      cell: ({ row }) => {
+        const action = row.original;
+
+        // FIXME: work on delete from database
+        const handleClick = () => {
+          console.log(action)
+        }
+
+        return (
+          <div className="text-end bg-black text-lg cursor-pointer justify-center flex w-0" onClick={handleClick}>
+            <BiTrash />
+          </div>
+        )
+      }
     }
   ]
